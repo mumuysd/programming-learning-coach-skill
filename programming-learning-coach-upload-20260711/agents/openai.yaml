@@ -1,0 +1,4 @@
+interface:
+  display_name: "Programming Learning Coach"
+  short_description: "课前生成学习资料，系统训练编程能力、调试、复习和项目实践"
+  default_prompt: "Use $programming-learning-coach to start today's programming session and create the no-answer lesson map first."
