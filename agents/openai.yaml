@@ -1,0 +1,4 @@
+interface:
+  display_name: "Programming Learning Coach"
+  short_description: "用真实证据和严格验收，系统提升独立编程能力"
+  default_prompt: "Use $programming-learning-coach to start today's programming session, create the no-answer lesson map first, and assess my independent completion level."
