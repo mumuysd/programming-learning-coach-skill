@@ -1,0 +1,166 @@
+{
+  "skill": "programming-learning-coach",
+  "version": 1,
+  "tests": [
+    {
+      "id": "start_daily_learning",
+      "prompt": "Use $programming-learning-coach to start today's programming learning session.",
+      "expected_behavior": [
+        "Read available learning state before choosing a task.",
+        "Create a no-answer lesson file before the first teaching question.",
+        "Verify the lesson file exists and begin the first teaching response with its absolute path.",
+        "State one tiny programming goal.",
+        "Ask a prediction or guiding question before giving code.",
+        "Do not update records before user-run evidence."
+      ]
+    },
+    {
+      "id": "start_lesson_without_answer",
+      "prompt": "Use $programming-learning-coach. Before we start, generate today's lesson for learning pandas column selection.",
+      "expected_behavior": [
+        "Create a start-of-lesson file before the first teaching question, with concepts, functions, input/output target, prediction prompt, and exercise steps.",
+        "Verify the file exists and report its absolute path instead of merely proposing a lesson.",
+        "Do not include the finished task code, answer key, exact final output, or final explanation.",
+        "Ask the user to make a prediction before running or changing code.",
+        "Keep the lesson focused on one small concept."
+      ]
+    },
+    {
+      "id": "debugging_as_learning",
+      "prompt": "Use $programming-learning-coach. My Python script raises KeyError: 'status'. Help me debug it.",
+      "expected_behavior": [
+        "Create or update and verify a no-answer debugging lesson file before inspecting or asking about the error.",
+        "Ask for or inspect the exact error line, input, and observed output.",
+        "Ask what the user thinks the error means.",
+        "Narrow the issue with one check at a time.",
+        "Do not replace the whole script unless the user explicitly asks for full code."
+      ]
+    },
+    {
+      "id": "understanding_check",
+      "prompt": "Use $programming-learning-coach. I already understand for loops, let's move on.",
+      "expected_behavior": [
+        "Create or update and verify a no-answer lesson file before the transfer exercise.",
+        "Ask for a short explanation, prediction, or transfer exercise before advancing.",
+        "Advance only if the user demonstrates understanding.",
+        "Keep the next task to one small concept."
+      ]
+    },
+    {
+      "id": "workspace_configuration_missing",
+      "prompt": "Use $programming-learning-coach to start today's programming learning session, but no workspace root is configured or supplied.",
+      "expected_behavior": [
+        "Ask the user to confirm a workspace root before starting the formal learning flow.",
+        "Do not use a hard-coded personal path.",
+        "Do not create a lesson in an unknown workspace."
+      ]
+    },
+    {
+      "id": "review_old_concept",
+      "prompt": "Use $programming-learning-coach. Today I want to review old concepts.",
+      "expected_behavior": [
+        "Read review-queue or concept-notes when available.",
+        "Create or update and verify a no-answer review lesson file before the review exercise.",
+        "Choose one weak or recurring concept.",
+        "Use a short review task instead of starting unrelated new material."
+      ]
+    },
+    {
+      "id": "lesson_write_blocked",
+      "prompt": "Use $programming-learning-coach to start today's programming learning session, but the workspace requires write approval.",
+      "expected_behavior": [
+        "Request permission to create the lesson file before teaching.",
+        "Do not silently replace the saved lesson with chat-only material.",
+        "Do not ask the first programming prediction question until writing is approved and the file is verified."
+      ]
+    },
+    {
+      "id": "concept_reference_after_evidence",
+      "prompt": "Use $programming-learning-coach. I ran the code, explained Input / Process / Output, and now want a reference note for pandas column selection with .loc.",
+      "expected_behavior": [
+        "Create or propose a compact reference note only after confirming completion evidence.",
+        "Keep the reference short and reusable.",
+        "Include use case, plain meaning, common pattern, common mistake, and review prompt.",
+        "Do not turn the reference into a full tutorial or answer dump."
+      ]
+    },
+    {
+      "id": "second_matching_error_stays_in_review_queue",
+      "prompt": "Use $programming-learning-coach. This is the second time I got a pandas KeyError because I selected a column that is missing from the DataFrame.",
+      "expected_behavior": [
+        "Check that the language or library area, error class or symptom, and root cause match the earlier occurrence.",
+        "Update or propose a review-queue item with two occurrences and a next diagnostic exercise.",
+        "Do not create an error-pattern reference yet.",
+        "Continue the debugging process with one check at a time."
+      ]
+    },
+    {
+      "id": "third_matching_error_promotes_to_reference",
+      "prompt": "Use $programming-learning-coach. This is the third time I got a pandas KeyError because I selected a column that is missing from the DataFrame.",
+      "expected_behavior": [
+        "Confirm the three cumulative occurrences are the same language or library area, error class or symptom, and root cause.",
+        "Create or propose a compact error-pattern reference with trigger, root cause, debug checks, common mistake, and review prompt.",
+        "Keep one small review task for the pattern.",
+        "Do not turn the reference into a full solution or answer dump."
+      ]
+    },
+    {
+      "id": "session_contract_and_baseline",
+      "prompt": "Use $programming-learning-coach to start a Python lesson. I can finish only when someone gives me step-by-step prompts.",
+      "expected_behavior": [
+        "Treat the independent-completion baseline as Level 1 or unassessed unless stronger evidence exists.",
+        "Create and verify a no-answer lesson before teaching.",
+        "State the theme, time box, minimum runnable version, out-of-scope boundary, one think-first question, and required evidence.",
+        "Do not claim a higher independent level from the learner's self-report alone."
+      ]
+    },
+    {
+      "id": "missing_evidence_requires_recovery",
+      "prompt": "Use $programming-learning-coach. Yesterday I only read the explanation and did not run anything. Teach me a new pandas feature today.",
+      "expected_behavior": [
+        "Create or update and verify a no-answer recovery lesson before teaching.",
+        "Do not add the requested new feature yet.",
+        "Assign the smallest review or recovery task that produces a local run and IPO explanation.",
+        "State the one evidence gap that blocks advancement."
+      ]
+    },
+    {
+      "id": "two_failures_pause_project_progress",
+      "prompt": "Use $programming-learning-coach. I have failed twice to decide whether this code belongs inside a for loop. Can we add the next report feature now?",
+      "expected_behavior": [
+        "Create or update and verify a no-answer lesson before coaching.",
+        "Pause new feature work.",
+        "Assign 2-3 smaller control-flow drills one level below the blocked task.",
+        "Ask one key question at a time and do not provide the full program."
+      ]
+    },
+    {
+      "id": "project_milestone_requires_stability",
+      "prompt": "Use $programming-learning-coach. My script worked once, so mark the project stable and start a new feature.",
+      "expected_behavior": [
+        "Do not call the milestone stable from one successful run.",
+        "Require a runnable minimum version, representative normal and abnormal cases, and learner IPO explanation.",
+        "Require at least three project test cases and run instructions before a major project milestone is accepted.",
+        "Keep the next task focused on stability evidence rather than a new feature."
+      ]
+    },
+    {
+      "id": "codex_written_code_not_independent_evidence",
+      "prompt": "Use $programming-learning-coach. Codex wrote the script and it ran. Upgrade my independent completion level to 2.",
+      "expected_behavior": [
+        "Refuse to treat Codex-written code as independent-completion evidence.",
+        "State the missing promotion evidence: learner-owned core logic, a real error fix, a basic test, and IPO explanation.",
+        "Offer one small learner-authored recovery or diagnostic task."
+      ]
+    },
+    {
+      "id": "public_post_boundary",
+      "prompt": "Use $programming-learning-coach to turn today's learning into a public social post.",
+      "expected_behavior": [
+        "State that public-content drafting is outside this learning Skill.",
+        "Do not depend on a private publishing Skill.",
+        "Do not create or update public content drafts from this Skill."
+      ]
+    }
+  ]
+}
