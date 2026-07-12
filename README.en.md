@@ -2,7 +2,7 @@
 
 > A no-answer programming-learning Skill for Python practice, debugging, review, and small project work.
 
-`programming-learning-coach` is not designed to immediately write a finished solution for the learner. It helps build a repeatable learning loop: read code, predict behavior, run code locally, inspect output, debug, and explain Input / Process / Output.
+`programming-learning-coach` is not designed to immediately write a finished solution for the learner. It helps build a repeatable learning loop: assess independent-completion ability, read code, predict behavior, run code locally, inspect output, debug, and explain Input / Process / Output.
 
 [中文 README](README.md)
 
@@ -17,6 +17,7 @@ This Skill makes that loop explicit:
 3. Use learner-run output as learning evidence.
 4. Teach debugging through error reading, hypothesis testing, and one change at a time.
 5. Record progress only after the learner can explain the process or complete a transfer exercise.
+6. Block advancement when the current feature is unstable or the learner lacks evidence for the next independent-completion level.
 
 ## Who It Is For
 
@@ -35,6 +36,7 @@ This Skill makes that loop explicit:
 | Debug an error | Guides error-type reading, line location, variable inspection, minimal reproduction, and one change at a time. |
 | Review a concept | Selects a weak concept or review-queue item, then asks for fresh evidence. |
 | Repeat an error | Tracks the first two occurrences; creates an error reference only after a third matching error. |
+| Assess independence | Records Levels 0-3 only from learner-owned evidence and promotion gates. |
 
 ## Install
 
@@ -68,6 +70,8 @@ The lesson map may contain goals, relevant concepts or functions, Input / Proces
 ### 2. Evidence-based coaching
 
 The Skill advances one small concept at a time. It asks a question or gives one hint, then waits for the learner to predict, try, run, inspect, and explain.
+
+Every formal session also states the learner's current independent-completion level, a time box, minimum runnable version, out-of-scope boundary, and required evidence. A project milestone needs stable representative cases before a new feature is added.
 
 When the learner says "I understand," the next step is an explanation, prediction, or small transfer exercise rather than immediate advancement.
 
