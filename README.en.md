@@ -16,7 +16,7 @@ This Skill makes that loop explicit:
 2. Ask the learner to predict behavior before running code.
 3. Use learner-run output as learning evidence.
 4. Teach debugging through error reading, hypothesis testing, and one change at a time.
-5. Record progress only after the learner can explain the process or complete a transfer exercise.
+5. Synchronize evidence-bearing session progress across the lesson, learning record, and current state.
 6. Block advancement when the current feature is unstable or the learner lacks evidence for the next independent-completion level.
 
 ## Who It Is For
@@ -37,6 +37,7 @@ This Skill makes that loop explicit:
 | Review a concept | Selects a weak concept or review-queue item, then asks for fresh evidence. |
 | Repeat an error | Tracks the first two occurrences; creates an error reference only after a third matching error. |
 | Assess independence | Records Levels 0-3 only from learner-owned evidence and promotion gates. |
+| Close a session | Synchronizes the lesson, record, current state, and an optional checkpoint-linked learning plan. |
 
 ## Install
 
@@ -91,7 +92,7 @@ learning-workspace/
 └── reference/
 ```
 
-The workspace can start small. Create only the files and directories needed for the learner's current stage.
+The workspace can start small. Create only the files and directories needed for the learner's current stage. Evidence-bearing sessions are closed with one synchronized operation; partial progress remains `in-progress`, while full evidence may complete the lesson or advance an optional plan checkpoint.
 
 ## Example Prompts
 
@@ -116,8 +117,10 @@ Review Python functions and return values with me.
 | `references/` | Coaching protocol, workspace structure, and lesson/reference rules. |
 | `scripts/create_lesson.py` | Creates a no-answer HTML lesson and index entry. |
 | `scripts/update_lesson.py` | Records a lesson's lifecycle progress. |
+| `scripts/finalize_session.py` | Synchronizes session evidence across progress artifacts. |
 | `scripts/rebuild_lesson_index.py` | Builds an index for existing lesson files. |
 | `scripts/run_preflight_regression.py` | Runs isolated Agent regression scenarios. |
+| `scripts/run_session_finalize_regression.py` | Tests partial progress, completion advancement, and evidence guards. |
 | `examples/` | Expected lesson and coaching examples. |
 | `test-prompts.json` | Behavior expectations for manual evaluation. |
 
@@ -143,9 +146,10 @@ In an environment with authenticated, non-interactive Codex CLI access, run the 
 ```bash
 cd ~/.codex/skills/programming-learning-coach
 python3 scripts/run_preflight_regression.py
+python3 scripts/run_session_finalize_regression.py
 ```
 
-The regression creates temporary workspaces for a new lesson, learning-oriented debugging, and review. It checks lesson creation, the matching `lesson-index.json` entry, a path-first response, and the absence of answer-like lesson markup.
+The preflight regression creates temporary workspaces for a new lesson, learning-oriented debugging, and review. The session-finalization regression verifies synchronized progress records, optional learning-plan advancement, and rejection of unsupported completion claims.
 
 ## Contributing
 
