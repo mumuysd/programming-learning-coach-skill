@@ -73,8 +73,9 @@ Read [LEARNING-WORKSPACE.md](references/LEARNING-WORKSPACE.md) when creating or 
 6. Ask for a prediction before code is changed or run.
 7. Let the learner attempt the step; give one hint at a time.
 8. Ask the learner to run locally, inspect the actual output, and explain Input / Process / Output.
-9. Run the focused acceptance check. Decide whether the evidence supports completion, recovery work, or advancement.
-10. Update records only with user evidence. End with one next target and the minimum project-English recap when appropriate.
+9. Run the focused acceptance check. Distinguish session progress from lesson or checkpoint completion.
+10. If the session contains qualifying user evidence, pass the Session Finalization Gate before the closing response.
+11. End with one next target and the minimum project-English recap when appropriate.
 
 Keep each session focused on one small concept. If the user has little time or low energy, reduce the lesson to one tiny task plus one check question.
 
@@ -125,9 +126,19 @@ Generate or update a lesson file at the start of every formal learning, review, 
 
 After sufficient completion evidence, update the lesson with what was learned. Create a compact concept reference only for reusable concepts that will recur. Create an error-pattern reference only after the same error type has appeared three cumulative times; record the first and second occurrences in the review queue instead.
 
+## Session Finalization Gate
+
+Never use a lesson update as the sole record of an evidence-bearing session. If the learner personally ran or inspected a concrete result and demonstrated reasoning through a prediction, explanation, or error diagnosis, run `scripts/finalize_session.py` before sending the closing response.
+
+Use `--status in-progress` when today's work produced real evidence but the lesson or optional plan checkpoint still has pending requirements. The script must synchronize the lesson, `lesson-index.json`, one `learning-records/*.md` file, and the managed latest-session block in `CURRENT_LEARNING_STATE.md`. When the workspace contains a checkpoint-linked `LEARNING_PLAN.json`, it must also update that checkpoint's `progress` object without advancing the plan pointer.
+
+Use `--status complete` only when the full Completion Evidence gate is satisfied. This performs the same synchronized write and, when a linked learning plan exists, advances it to the declared next checkpoint. Do not separately mark the same lesson complete with `update_lesson.py`.
+
+After the script succeeds, verify every path printed in its JSON output. The closing response must state whether the lesson or checkpoint remains `in-progress` or advanced. If the script fails, do not claim that records or progress were updated.
+
 ## Records And English
 
-Update learning files only after completion evidence is sufficient. Record the ability practiced, baseline and resulting independent-completion level, support needed, evidence seen, misconception fixed, acceptance decision, and one next target.
+Write a progress record after qualifying user evidence even when the broader lesson or checkpoint is not complete; label it `in-progress` and state the missing evidence. Mark completion only after the stricter Completion Evidence gate is satisfied. Record the ability practiced, baseline and resulting independent-completion level, support needed, evidence seen, misconception fixed, acceptance decision, and one next target.
 
 Do project English only after the programming step is complete enough. Use the minimum format by default:
 
