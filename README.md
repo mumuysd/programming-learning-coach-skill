@@ -36,7 +36,7 @@
 | “我看提示做完了” | 记录当前独立完成度；没有足够证据时不虚报升级。 |
 | 想复习旧概念 | 从复习队列和薄弱点中选内容，混入新场景重新练习。 |
 | 同一种错误反复出现 | 前两次进入复习队列，第三次才沉淀为可复用的错误参考。 |
-| 一次完成的学习 | 基于真实运行和解释证据更新学习记录，并可做简短项目英语复盘。 |
+| 一次有证据的学习 | 同步更新 lesson、学习记录和当前状态；若配置了学习计划，也同步记录关卡进展。 |
 
 核心流程：
 
@@ -50,7 +50,8 @@
 -> Input / Process / Output 解释
 -> 小迁移练习或复习
 -> 严格验收是否达标
--> 更新学习记录
+-> 同步 lesson、学习记录与当前状态
+-> 如有学习计划，记录进展或推进关卡
 ```
 
 核心原则：
@@ -164,7 +165,7 @@ cp WORKSPACE.example.md WORKSPACE.md
 | 🔁 | Review Queue | 薄弱点、隔天复习、混入新项目的复习任务 |
 | 📏 | Independent Completion | 0-3 级独立完成度、晋级证据、失败后的恢复练习 |
 | 🗂 | Lesson Lifecycle | `lesson-index.json`、prepared / in-progress / complete 状态 |
-| 📝 | Learning Records | 基于真实学习证据的记录与下一步建议 |
+| 📝 | Session Finalization | 同步 lesson、学习记录、当前状态和可选学习计划 |
 | 📖 | Reference Builder | 概念笔记和三次重复错误后的长期参考资料 |
 | 🌐 | Project English | 完成学习后的一句话、5 个词和 IPO 复盘 |
 
@@ -278,8 +279,10 @@ programming-learning-coach/
 | `references/` | 教学协议、工作区结构和课件/参考资料规则。 |
 | `scripts/create_lesson.py` | 创建无答案 HTML lesson 与索引记录。 |
 | `scripts/update_lesson.py` | 更新 lesson 的学习阶段状态。 |
+| `scripts/finalize_session.py` | 用一次收尾操作同步学习证据和进度文件。 |
 | `scripts/rebuild_lesson_index.py` | 为已有 lesson 重建索引。 |
 | `scripts/run_preflight_regression.py` | 运行隔离的 Agent 回归测试。 |
+| `scripts/run_session_finalize_regression.py` | 验证阶段性记录、完成推进和证据门槛。 |
 | `examples/` | 课件和教学对话示例。 |
 | `test-prompts.json` | 人工评估时的行为期望。 |
 
@@ -298,6 +301,7 @@ python3 ~/.codex/skills/.system/skill-creator/scripts/quick_validate.py ~/.codex
 ```bash
 cd ~/.codex/skills/programming-learning-coach
 python3 scripts/run_preflight_regression.py
+python3 scripts/run_session_finalize_regression.py
 ```
 
 测试会创建“新课”“学习型调试”和“复习”三个临时学习目录，并检查：
@@ -307,6 +311,9 @@ python3 scripts/run_preflight_regression.py
 - 首条教学回复是否先报告 lesson 路径；
 - lesson 中是否泄漏答案式内容。
 - lesson 是否包含独立完成度和最低可运行版本。
+- 阶段性学习是否同步写入 lesson、学习记录和当前状态；
+- 可选学习计划是否只在完整证据后推进；
+- 缺少预测或 IPO 时是否拒绝误判完成。
 
 ## 贡献
 

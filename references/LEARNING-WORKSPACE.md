@@ -6,7 +6,7 @@ Use this reference when reading or updating the programming learning workspace. 
 
 Resolve the workspace from an explicit user path first, then from `WORKSPACE.md` beside the installed Skill. `WORKSPACE.example.md` is the publishable template; `WORKSPACE.md` is local configuration and must not be committed.
 
-Treat `CURRENT_LEARNING_STATE.md` as the source of truth for the next session. Treat the annual plan as a roadmap, not a calendar that overrides evidence.
+Treat the managed `Latest Recorded Session` block near the top of `CURRENT_LEARNING_STATE.md` as the newest session truth, then use the rest of the file for longer-term context. Treat any learning plan as a roadmap, not a calendar that overrides evidence.
 
 When available, keep these fields short and current:
 
@@ -90,7 +90,7 @@ Create or update a `lessons/` file before the first teaching question, code chan
 - exercise steps,
 - blank space for observations.
 
-Use `scripts/create_lesson.py` for a new topic; it adds a `prepared` entry to `lesson-index.json`. If existing lesson files have no index, run `scripts/rebuild_lesson_index.py` once. Use `scripts/update_lesson.py` for a continuing or completed lesson: `in-progress` before teaching, `complete` only with user evidence, and a next-review task when appropriate.
+Use `scripts/create_lesson.py` for a new topic; it adds a `prepared` entry to `lesson-index.json`. If existing lesson files have no index, run `scripts/rebuild_lesson_index.py` once. Use `scripts/update_lesson.py --status in-progress` before teaching a continuing lesson. Close an evidence-bearing session with `scripts/finalize_session.py`; do not mark a lesson complete through a lesson-only update.
 
 Do not include finished code, answer keys, exact final output, or final explanations in a start-of-lesson artifact. If the workspace cannot be written, request permission and pause instead of replacing the file with chat-only material. After the user has completed the evidence loop, update the lesson with what happened and what should be reviewed next.
 
@@ -123,7 +123,9 @@ Use the following format for a concept reference:
 
 ## Learning Records
 
-Write a learning record only when the user demonstrated understanding, corrected a misconception, completed a real run, or changed the learning path.
+Write a learning record when the user demonstrated understanding through a personally inspected run, corrected a misconception with concrete evidence, or changed the learning path based on an observed result. A record may be `in-progress`; it must say what evidence is still missing and must not imply that a broader lesson or checkpoint is complete.
+
+Use `scripts/finalize_session.py` for every evidence-bearing session close. It synchronizes the lesson, lesson index, learning record, latest-session state block, and an optional checkpoint-linked learning plan. Do not update only the lesson and defer the other files to a later message.
 
 Recommended format:
 
