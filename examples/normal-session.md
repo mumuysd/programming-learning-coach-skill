@@ -11,7 +11,7 @@ Use $programming-learning-coach to continue my Python automation learning sessio
 ```text
 学习资料已生成：/absolute/path/to/lessons/0016-dictionary-summary-values.html
 
-Current stage: you are improving a weekly report script that reads task data and writes Markdown.
+Lesson type: practice. You are improving a report script that reads task data and writes Markdown; this session applies known CSV and loop behavior rather than claiming a new concept.
 
 Independent level: 1. You can work with guided questions, but there is not yet enough evidence to claim you can rebuild this feature without prompts.
 

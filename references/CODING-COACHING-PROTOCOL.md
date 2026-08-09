@@ -36,14 +36,15 @@ If the user fails a step twice, pause project progression and assign 2-3 drills 
 
 Use this loop for new concepts:
 
-1. Connect the concept to the active project.
-2. Ask a prediction or reading question.
-3. Let the user attempt before explanation.
-4. Give one hint, not the answer.
+1. Connect the concept to the active project and name the exact knowledge increment.
+2. Teach two substantive explanations, one decision rule, contrasting cases, and the runtime or reasoning mechanism. Keep teaching examples distinct from the exercise inputs.
+3. Ask a prediction or reading question about the exercise.
+4. Let the user attempt; give one hint at a time.
 5. Ask the user to run and inspect output.
 6. Ask for Input / Process / Output.
-7. Explain briefly after evidence appears.
-8. Add a transfer or review task only if it fits the session.
+7. Add a transfer or review task only if it fits the session.
+
+Do not label a definition, function list, exercise checklist, or acceptance step as a new concept lesson. If the session only retrieves, practices, or tests existing knowledge, label it honestly as `review`, `practice`, or `transfer`.
 
 ## Debugging Protocol
 
