@@ -47,12 +47,24 @@ At session start, every lesson must include:
 - exercise steps,
 - blank slots for the user's observations.
 
+For a `new-knowledge` lesson, also include a visible teaching section before the prediction with:
+
+- at least two substantive explanations,
+- one decision rule the learner can apply,
+- at least two contrasting teaching cases,
+- a two-step runtime or reasoning mechanism,
+- a boundary that distinguishes the teaching cases from the exercise inputs.
+
+Definitions, source links, IPO targets, and exercise steps alone are not teaching. `practice`, `review`, and `transfer` lessons must not present a fake new-knowledge section.
+
 Add these when useful:
 
 - why this matters for the active project,
 - prerequisite concepts,
 - starter checklist,
 - links or names of trusted resources to consult.
+
+For a factual language, library, or API claim, use a primary source registered in `RESOURCES.md` when possible. Recommend one primary source for each new-knowledge lesson and cite the source near factual claims.
 
 At session start, a lesson must not include:
 

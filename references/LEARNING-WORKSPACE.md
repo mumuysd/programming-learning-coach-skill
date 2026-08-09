@@ -60,7 +60,7 @@ If `MISSION.md` is missing or stale, ask before changing it. Keep it short:
 
 ## Resources
 
-Use `RESOURCES.md` to keep high-trust sources. Prefer official documentation when explaining library behavior.
+Use `RESOURCES.md` to keep high-trust sources. Prefer official documentation when explaining language or library behavior. When a new topic has no suitable entry, first add a compact title, URL or local locator, scope, and use condition; then use it for the lesson. A local code file or error can be the source when external material is unavailable, but label the remaining source gap instead of presenting uncertain behavior as verified fact.
 
 ```md
 # Programming Resources

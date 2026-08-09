@@ -33,8 +33,18 @@ def entry_from_path(workspace: Path, path: Path, current: str | None) -> dict:
         "updated_at": now(),
         "last_evidence": None,
         "next_review": None,
+        "lesson_type": None,
+        "knowledge_delta": None,
+        "why_now": "Historical lesson rebuilt from filename; classify before resuming.",
         "independent_level": "unassessed",
+        "support_level": "unassessed",
         "minimum_version": None,
+        "teaching_content": {
+            "explanations": [],
+            "decision_rules": [],
+            "contrast_cases": [],
+            "mechanism_steps": [],
+        },
     }
 
 
